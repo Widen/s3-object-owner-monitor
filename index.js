@@ -15,27 +15,38 @@ exports.handler = (event, context, callback) => {
         console.log(err, err.stack);
       } else {
         console.log(data);
-        processAcl(bucket, key, data.Owner.DisplayName, callback);
+        processObjectAcl(bucket, key, data.Owner.DisplayName, callback);
       }
     });
 };
 
 /**
  * Processes getObjectAcl request on newly added object. Checks owner
- * against process.env.OWNER variable.
+ * against bucket owner.
  * @param {string} bucket Name of S3 bucket containing object to change.
  * @param {string} key Key of S3 object whose owner must be checked.
  * @param {string} owner Owner display name of S3 object that was created.
  * @param {function} callback Callback function provided by AWS Lambda.
  */
-function processAcl(bucket, key, owner, callback) {
-  if (owner != process.env.OWNER) {
-    console.log('Switch needed');
-    changeOwner(bucket, key, callback);
-  } else {
-    console.log('No switch needed');
-    callback(null, 'Success');
-  }
+function processObjectAcl(bucket, key, owner, callback) {
+  var params = {
+    Bucket: bucket
+  };
+  s3.getBucketAcl(params, function(err, data) {
+    if (err) {
+      console.log(err, err.stack);
+      callback(err);
+    } else {
+      console.log(data);
+      if (owner != data.Owner.DisplayName) {
+        console.log('Switch needed');
+        changeOwner(bucket, key, callback);
+      } else {
+        console.log('No switch needed');
+        callback(null, 'Success');
+      }
+    }
+  });
 }
 
 /**
