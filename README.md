@@ -9,12 +9,11 @@ AWS Lambda function triggered by S3 Object Put events that monitors the owner of
     "Version": "2012-10-17",
     "Statement": [
         {
-            "Sid": "EXAMPLE",
             "Effect": "Allow",
             "Action": [
                 "s3:Get*",
-                "s3:PutObject*",
-                "s3:DeleteObject*"
+                "s3:DeleteObject*",
+                "s3:PutObject*"
             ],
             "Resource": "arn:aws:s3:::{YOUR_S3_BUCKET_NAME}/*"
         }
