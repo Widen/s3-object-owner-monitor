@@ -21,7 +21,6 @@ AWS Lambda function triggered by S3 Object Put events that monitors the owner of
     ]
 }
 ```
-1. Add an environment variable named `OWNER` that contains the display name of account Lambda function is on.
 1. Under configuration, add an S3 trigger
     1. Select your bucket (same as specified in the IAM policy)
     1. Under event type, select PUT
