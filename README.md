@@ -12,8 +12,9 @@ AWS Lambda function triggered by S3 Object Put events that monitors the owner of
             "Sid": "EXAMPLE",
             "Effect": "Allow",
             "Action": [
-                "s3:ReplicateObject",
-                "s3:GetObjectAcl"
+                "s3:Get*",
+                "s3:PutObject*",
+                "s3:DeleteObject*"
             ],
             "Resource": "arn:aws:s3:::{YOUR_S3_BUCKET_NAME}/*"
         }
