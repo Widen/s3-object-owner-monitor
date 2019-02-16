@@ -5,6 +5,8 @@ var s3 = new AWS.S3({apiVersion: '2006-03-01'});
 exports.handler = (event, context, callback) => {
     var bucket = event.Records[0].s3.bucket.name;
     var key = event.Records[0].s3.object.key.replace(/\+/g, " ");
+    
+    console.log('Checking object ' + key + ' in bucket ' + bucket);
 
     var params = {
       Bucket: bucket,
