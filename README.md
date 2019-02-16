@@ -11,7 +11,8 @@ AWS Lambda function triggered by S3 Object Put events that monitors the owner of
         {
             "Effect": "Allow",
             "Action": [
-                "s3:Get*",
+                "s3:GetBucket*",
+                "s3:GetObject*",
                 "s3:DeleteObject*",
                 "s3:PutObject*"
             ],
