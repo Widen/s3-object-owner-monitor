@@ -1,8 +1,8 @@
 # S3 Object Owner Monitor
-AWS Lambda function triggered by S3 Object Put events that monitors the owner of newly created object and modifies them if necessary.
+AWS Lambda function triggered by S3 Object Put events that monitors the owner of newly created objects and modifies the account owner if the file was written by an account other then the bucket owner.
 
 # Common Use Case
-When serving private S3 content via Cloudfront, and [origin accesss idenity](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-restricting-access-to-s3.html), all objects must be *__owned__* by the primary account. However, files written by other accounts, even when granting `bucket-owner-full-control` canned ACL, are not *__owned__* by the primary account. This script corrects the problem by re-writeing the file under the primary account.
+When serving private S3 content via Cloudfront, and [origin accesss idenity](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-restricting-access-to-s3.html), all objects must be *__owned__* by the primary bucket account. However, files written by other accounts, even when granting the `bucket-owner-full-control` ACL, are not *__owned__* by the primary account. This script corrects the problem by modifying the owner to be the primary bucket account.
 
 This script is particularly useful if using [cloudfront-auth](https://github.com/Widen/cloudfront-auth).
 
