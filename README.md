@@ -6,7 +6,7 @@ When serving private S3 content via Cloudfront, and [origin accesss idenity](htt
 
 This script is particularly useful if using [cloudfront-auth](https://github.com/Widen/cloudfront-auth).
 
-## Setup
+# Setup
 1. Create AWS Lambda function and upload/copy index.js
 1. Add IAM policy with the following permissions
 ```
